@@ -1,165 +1,69 @@
 <div class="main-content">
   <div class="container-fluid">
-      <div class="row">
-          <div class="col-md-12">
-              <div class="card">
-                  <div class="card-body">
-                        <div class="container-fluid">
-                           
-                            <div class="row">
-                                <div class="col">
+    <div class="card">
+        <div class="card-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
 
-                                    <!-- Preguntas   -->
-                                    <mat-card class="mat-card-m">
-                                        <mat-card-header>
-                                            <mat-card-title class="over-title">
-                                                <mat-icon mat-list-icon>question_answer</mat-icon>  Consecionarios 
-                                            </mat-card-title>
-                                        </mat-card-header>
-                                        <mat-card-content>
-                                            <mat-list style="margin-left: 5%">
-                                                <mat-list-item>
-                                                    <h5 mat-line> 
-                                                        <button [style.background-color]="countQuestions > 0 ? '#cf0a2c' : ''" (click)="openDialogQuestions()" class="btn btn-sm">{{ countQuestions }}</button>
-                                                        <a (click)="openDialogQuestions()" href="javascript:void(0)">  Activos</a>
-                                                    </h5>
-                                                </mat-list-item>
+                        <!-- Preguntas   -->
+                        <mat-card class="mat-card-m">
+                            <mat-card-header>
+                                <mat-card-title class="over-title">
+                                    <mat-icon mat-list-icon>shopping_basket</mat-icon>  Clientes 
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <mat-list style="margin-left: 5%">
+                                    <mat-list-item>
+                                        <h5 mat-line> 
+                                            <button [style.background-color]="countClientsActive > 0 ? '#cf0a2c' : ''" (click)="goToClients()" class="btn btn-sm">{{ countClientsActive }}</button>
+                                            <a (click)="goToClients()" href="javascript:void(0)">  Activos</a>
+                                        </h5>
+                                    </mat-list-item>
 
-                                                <mat-list-item>
-                                                    <h5 mat-line> 
-                                                        <button [style.background-color]="countQuestions > 0 ? '#cf0a2c' : ''" (click)="openDialogQuestions()" class="btn btn-sm">{{ countQuestions }}</button>
-                                                        <a (click)="openDialogQuestions()" href="javascript:void(0)">  Inactivos</a>
-                                                    </h5>
-                                                </mat-list-item>
-                                            </mat-list>
-                                        </mat-card-content>
-                                    </mat-card>
+                                    <mat-list-item>
+                                        <h5 mat-line> 
+                                            <button [style.background-color]="countClientsInactive > 0 ? '#cf0a2c' : ''" (click)="goToClients()" class="btn btn-sm">{{ countClientsInactive }}</button>
+                                            <a (click)="goToClients()" href="javascript:void(0)">  Inactivos</a>
+                                        </h5>
+                                    </mat-list-item>
+                                </mat-list>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
 
-                                    <br>
+                    <div class="col">
+                         <!--  Publicaciones -->
+                         <mat-card class="mat-card-m">
+                            <mat-card-header>
+                                <mat-card-title class="over-title">
+                                    <mat-icon mat-list-icon>store</mat-icon>  Consecionarios 
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <mat-list style="margin-left: 5%">
+                                    <mat-list-item>
+                                        <h5 mat-line> 
+                                            <button class="btn btn-sm">0</button>
+                                            <a href="javascript:void(0)">  Activos</a>
+                                        </h5>
+                                    </mat-list-item>
 
-                                    <!--  Publicaciones -->
-                                    <mat-card class="mat-card-m">
-                                        <mat-card-header>
-                                            <mat-card-title class="over-title">
-                                                <mat-icon mat-list-icon>bookmarks</mat-icon>  Clientes 
-                                            </mat-card-title>
-                                        </mat-card-header>
-                                        <mat-card-content>
-                                            <mat-list style="margin-left: 5%">
-                                                <mat-list-item>
-                                                    <h5 mat-line> 
-                                                        <button class="btn btn-sm">0</button>
-                                                        <a href="javascript:void(0)">  Activos</a>
-                                                    </h5>
-                                                </mat-list-item>
+                                    <mat-list-item>
+                                        <h5 mat-line> 
+                                            <button class="btn btn-sm">0</button>
+                                            <a href="javascript:void(0)">  Inactivos</a>
+                                        </h5>
+                                    </mat-list-item>
 
-                                                <mat-list-item>
-                                                    <h5 mat-line> 
-                                                        <button class="btn btn-sm">0</button>
-                                                        <a href="javascript:void(0)">  Inactivos</a>
-                                                    </h5>
-                                                </mat-list-item>
-
-                                            </mat-list>
-                                        </mat-card-content>
-                                    </mat-card>
-
-                                </div>
-
-                                <div class="col">
-
-                                    <!-- Estadisticas de ventas   -->
-                                    <mat-card class="mat-card-m">
-                                        <mat-card-header>
-                                            <mat-card-title class="over-title">
-                                                <mat-icon mat-list-icon>calendar_today</mat-icon>  Estadisticas de ventas 
-                                            </mat-card-title>
-                                        </mat-card-header>
-                                        <mat-card-content>
-                                            <div class="row">
-                                                <mat-tab-group>
-                                                    <mat-tab>
-                                                        <ng-template mat-tab-label>
-                                                        Diario
-                                                        </ng-template>
-                                                        <mat-list style="margin-left: 5%">
-                                                            <mat-list-item>
-                                                                <h5 mat-line> 
-                                                                    <button class="btn btn-sm">0</button>
-                                                                    Hoy
-                                                                </h5>
-                                                            </mat-list-item>
-
-                                                            <mat-list-item>
-                                                                <h5 mat-line> 
-                                                                    <button class="btn btn-sm">0</button>
-                                                                    Ayer
-                                                                </h5>
-                                                            </mat-list-item>
-                                                        </mat-list>
-                                                    </mat-tab>
-                                                    
-                                                    <mat-tab>
-                                                        <ng-template mat-tab-label>
-                                                        Semanal
-                                                        </ng-template>
-                                                        
-                                                        <mat-list style="margin-left: 5%">
-                                                            <mat-list-item>
-                                                                <h5 mat-line> 
-                                                                    <button class="btn btn-sm">0</button>
-                                                                    Desde el lunes
-                                                                </h5>
-                                                            </mat-list-item>
-
-                                                            <mat-list-item>
-                                                                <h5 mat-line> 
-                                                                    <button class="btn btn-sm">0</button>
-                                                                    Semana pasada
-                                                                </h5>
-                                                            </mat-list-item>
-
-                                                            <mat-list-item>
-                                                                <h5 mat-line> 
-                                                                    <button class="btn btn-sm">0</button>
-                                                                    Hace dos semanas
-                                                                </h5>
-                                                            </mat-list-item>
-                                                        </mat-list>
-                                                    </mat-tab>
-                                                    
-                                                    <mat-tab>
-                                                        <ng-template mat-tab-label>
-                                                        Mensual
-                                                        </ng-template>
-                                                    
-                                                        <mat-list style="margin-left: 5%">
-                                                            <mat-list-item>
-                                                                <h5 mat-line> 
-                                                                    <button class="btn btn-sm">0</button>
-                                                                    Este mes
-                                                                </h5>
-                                                            </mat-list-item>
-
-                                                            <mat-list-item>
-                                                                <h5 mat-line> 
-                                                                    <button class="btn btn-sm">0</button>
-                                                                    Mes pasado
-                                                                </h5>
-                                                            </mat-list-item>
-                                                        </mat-list>
-                                                    </mat-tab>
-                                                </mat-tab-group>
-                                            </div>
-                                        </mat-card-content>
-                                    </mat-card>
-
-                                </div>
-                            </div>
-                        </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+                                </mat-list>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
 </div>

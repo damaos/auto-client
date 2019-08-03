@@ -54,6 +54,28 @@ export class ClientsService {
     }
   }
 
+  async getCountClientsActive() {
+    const clients = JSON.parse(localStorage.getItem('clients'));
+    if (Array.isArray(clients)) {
+      const clientsActives = await clients.filter((client) => client.status)
+      const count = await clientsActives.length;
+      return count;
+    } else {
+      return 0;
+    }
+  }
+
+  async getCountClientsInactive() {
+    const clients = JSON.parse(localStorage.getItem('clients'));
+    if (Array.isArray(clients)) {
+      const clientsInactives = await clients.filter((client) => !client.status)
+      const count = await clientsInactives.length;
+      return count;
+    } else {
+      return 0;
+    }
+  }
+
   // Get the index from array's objects
   public arrayObjectIndexOf(arr, obj) {
     for (let i = 0; i < arr.length; i++) {
