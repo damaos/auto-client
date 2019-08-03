@@ -2,11 +2,11 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
-  selector: 'app-add-client',
-  templateUrl: './add-client.component.html',
-  styleUrls: ['./add-client.component.scss']
+  selector: 'app-client-ux',
+  templateUrl: './client-ux.component.html',
+  styleUrls: ['./client-ux.component.scss']
 })
-export class AddClientComponent implements OnInit {
+export class ClientUXComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<any>,

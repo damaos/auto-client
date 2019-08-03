@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientsService } from 'app/clients/services/clients.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AddClientComponent } from '../add-client/add-client.component';
+import { ClientUXComponent } from '../client-ux/client-ux.component';
 
 @Component({
   selector: 'app-sales',
@@ -40,7 +40,7 @@ export class ClientsComponent implements OnInit {
   }
 
   openDialogAddClient() {
-    const dialogRef = this.dialog.open(AddClientComponent, {
+    const dialogRef = this.dialog.open(ClientUXComponent, {
       width: '450px',
       data: {
         id: Math.floor((Math.random() * 1000 ) + 1),

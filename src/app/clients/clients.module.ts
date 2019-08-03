@@ -4,11 +4,11 @@ import { ClientsComponent } from './components/clients/clients.component';
 import { AngularMaterialModule } from 'app/angular-material/angular-material.module';
 import { OverviewModule } from 'app/overview/overview.module';
 import { ClientsService } from './services/clients.service';
-import { AddClientComponent } from './components/add-client/add-client.component';
+import { ClientUXComponent } from './components/client-ux/client-ux.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [ClientsComponent, AddClientComponent],
+  declarations: [ClientsComponent, ClientUXComponent],
   imports: [
     CommonModule,
     AngularMaterialModule,
@@ -19,7 +19,7 @@ import { FormsModule } from '@angular/forms';
     ClientsService
   ],
   entryComponents: [
-    AddClientComponent
+    ClientUXComponent
   ]
 })
 export class ClientsModule { }
