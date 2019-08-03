@@ -1,0 +1,25 @@
+.example-card {
+    max-width: 350%;
+    box-shadow: 0px !important;
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+.mat-card-m:not([class*="mat-elevation-z"]) {
+    box-shadow: none;
+}
+
+.navigation-number-gray {
+    background: #999;
+}
+
+.example-tab-icon {
+    margin-right: 8px;
+}
+
+.over-title {
+    color: #999
+}
