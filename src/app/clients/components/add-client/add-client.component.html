@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>Agregar cliente</h1>
+<div mat-dialog-content>
+    <form #addClientForm="ngForm">
+        
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Nombre" [ngModelOptions]="{standalone: true}" [(ngModel)]="data.name" required>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <mat-label>Concesionario</mat-label>
+            <mat-select [ngModelOptions]="{standalone: true}" [(ngModel)]="data.dealer" required>
+                <mat-option *ngFor="let dealer of [1,2,3,4,5]" [value]="dealer">
+                    {{dealer}}
+                </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <mat-label>Ciudad</mat-label>
+            <mat-select [ngModelOptions]="{standalone: true}" [(ngModel)]="data.city" required>
+                <mat-option *ngFor="let city of [1,2,3,4,5]" [value]="city">
+                    {{city}}
+                </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cerrar</button>
+  <button [disabled]="validateDataClient()" mat-button [mat-dialog-close]="data" cdkFocusInitial>Agregar</button>
+</div>

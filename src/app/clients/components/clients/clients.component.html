@@ -1,0 +1,164 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <mat-tab-group color='warn'>
+                                <mat-tab>
+                                    <ng-template mat-tab-label>
+                                        <mat-icon mat-list-icon>person</mat-icon>
+                                        <div class="titles-mat-tap">Activos</div>
+                                    </ng-template>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col col-md-4">
+                                            <mat-form-field  appearance="outline">
+                                                <mat-label>Favorite food</mat-label>
+                                                <mat-select>
+                                                  <mat-option *ngFor="let food of [1,2,3,4,5]" [value]="food">
+                                                    {{food}}
+                                                  </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col col-md-4">
+                                            <mat-form-field  appearance="outline">
+                                                <mat-label>Favorite food</mat-label>
+                                                <mat-select>
+                                                  <mat-option *ngFor="let food of [1,2,3,4,5]" [value]="food">
+                                                    {{food}}
+                                                  </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col col-md-3">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Buscar</mat-label>
+                                                <input matInput placeholder="Buscar">
+                                                <mat-icon matSuffix>search</mat-icon>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col col-md-1">
+                                            <button (click)="openDialogAddClient()" mat-raised-button color="primary" style='margin-top: 15%;'  aria-label="Example icon-button with a heart icon">
+                                                Agregar cliente
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <br>
+                                    <mat-list *ngFor="let client of clientsActives; let i = index;">
+                                        <mat-list-item>
+                                            <mat-toolbar>
+                                                <mat-toolbar-row class="items-border">
+                                                    <span>{{ client.name }}</span>
+                                                    <span class="example-spacer"></span>
+
+                                                    <button class="example-icon" mat-icon-button
+                                                        [matMenuTriggerFor]="menu">
+                                                        <mat-icon>more_vert</mat-icon>
+                                                    </button>
+                                                    <mat-menu #menu="matMenu">
+                                                        <button mat-menu-item>Ver detalle</button>
+                                                        <button mat-menu-item>Actualizar</button>
+                                                        <button (click)="disableClient(i, client)" mat-menu-item>Inactivar</button>
+                                                    </mat-menu>
+
+                                                </mat-toolbar-row>
+                                            </mat-toolbar>
+                                        </mat-list-item>
+                                        <br>
+                                    </mat-list>
+                                    
+                                    <mat-list *ngIf="!clientsActives">
+                                        <mat-list-item>
+                                            <mat-icon color='warn' mat-list-icon>error_outline</mat-icon>
+                                            <h5 mat-line>Aun no tienes clientes</h5>
+                                        </mat-list-item>
+                                    </mat-list>
+                                    <br>
+
+                                </mat-tab>
+
+                                <mat-tab>
+                                    <ng-template mat-tab-label>
+                                        <mat-icon mat-list-icon>person_add_disabled</mat-icon>
+                                        <div class="titles-mat-tap">Inactivos</div>
+                                    </ng-template>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col col-md-4">
+                                            <mat-form-field  appearance="outline">
+                                                <mat-label>Favorite food</mat-label>
+                                                <mat-select>
+                                                  <mat-option *ngFor="let food of [1,2,3,4,5]" [value]="food">
+                                                    {{food}}
+                                                  </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col col-md-4">
+                                            <mat-form-field  appearance="outline">
+                                                <mat-label>Favorite food</mat-label>
+                                                <mat-select>
+                                                  <mat-option *ngFor="let food of [1,2,3,4,5]" [value]="food">
+                                                    {{food}}
+                                                  </mat-option>
+                                                </mat-select> 
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col col-md-3">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Buscar</mat-label>
+                                                <input matInput placeholder="Buscar">
+                                                <mat-icon matSuffix>search</mat-icon>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <mat-list *ngFor="let client of clientsInactives">
+                                        <mat-list-item>
+                                            <mat-toolbar>
+                                                <mat-toolbar-row class="items-border">
+                                                    <span>{{ client.name }}</span>
+                                                    <span class="example-spacer"></span>
+
+                                                    <button class="example-icon" mat-icon-button
+                                                        [matMenuTriggerFor]="menu">
+                                                        <mat-icon>more_vert</mat-icon>
+                                                    </button>
+                                                    <mat-menu #menu="matMenu">
+                                                        <button mat-menu-item>Ver detalle</button>
+                                                        <button mat-menu-item>Actualizar</button>
+                                                        <button mat-menu-item>Activar</button>
+                                                    </mat-menu>
+
+                                                </mat-toolbar-row>
+                                            </mat-toolbar>
+                                        </mat-list-item>
+                                        <br>
+                                    </mat-list>
+
+                                    <mat-list *ngIf="!clientsInactives">
+                                        <mat-list-item>
+                                            <mat-icon color='warn' mat-list-icon>error_outline</mat-icon>
+                                            <h5 mat-line>Aun no tienes clientes inactivos</h5>
+                                        </mat-list-item>
+                                    </mat-list>
+                                    <br>
+
+                                </mat-tab>
+                            </mat-tab-group>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
