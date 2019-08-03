@@ -1,0 +1,34 @@
+<div class="logo">
+    <a href="javascript:void(0)" class="simple-text">
+        Auto Client
+    </a>
+</div>
+<div class="sidebar-wrapper">
+  <div *ngIf="isMobileMenu()">
+    <ul class="nav navbar-nav nav-mobile-menu">
+        <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)">
+                <button mat-icon-button>
+                    <mat-icon>person</mat-icon>
+                </button>
+                
+                <mat-list>
+                    <mat-list-item>
+                        <mat-icon mat-list-icon>exit_to_app</mat-icon>
+                        <button (click)="logOut()" type="submit" mat-button>Cerrar sesion</button>
+                    </mat-list-item>
+                </mat-list>
+            </a>
+            
+        </li>
+    </ul>
+  </div>
+    <ul class="nav">
+        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+            <a class="nav-link" [routerLink]="[menuItem.path]">
+                <i class="material-icons">{{menuItem.icon}}</i>
+                <p>{{menuItem.title}}</p>
+            </a>
+        </li>
+    </ul>
+</div>
