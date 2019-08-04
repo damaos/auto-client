@@ -15,7 +15,6 @@ export class ClientsService {
       return []
     } else {
       const clientsActives = await clients.filter((cli => cli.status));
-      console.log('clientsActives', clientsActives);
       return clientsActives;
     }
   }
@@ -26,7 +25,6 @@ export class ClientsService {
       return []
     } else {
       const clientsInactives = await clients.filter((cli => !cli.status))
-      console.log('clientsInactives', clientsInactives)
       return clientsInactives;
     }
   }
@@ -42,12 +40,36 @@ export class ClientsService {
     localStorage.setItem('clients', JSON.stringify(clients))
   }
 
+  async updateClient(client: ClientModel) {
+    const clients = await JSON.parse(localStorage.getItem('clients'));
+    if (Array.isArray(clients)) {
+      let clientUp = clients.filter(cli => cli.id === client.id)[0];
+      const index = this.arrayObjectIndexOf(clients, clientUp);
+      clientUp = client;
+      clients[index] = clientUp;
+      localStorage.setItem('clients', JSON.stringify(clients))
+      return clientUp;
+    }
+  }
+
   async disableClient(client: ClientModel) {
     const clients = await JSON.parse(localStorage.getItem('clients'));
     if (Array.isArray(clients)) {
       const clientUp = clients.filter(cli => cli.id === client.id)[0];
       const index = this.arrayObjectIndexOf(clients, clientUp);
       clientUp.status = false;
+      clients[index] = clientUp;
+      localStorage.setItem('clients', JSON.stringify(clients))
+      return clientUp;
+    }
+  }
+
+  async enableClient(client: ClientModel) {
+    const clients = await JSON.parse(localStorage.getItem('clients'));
+    if (Array.isArray(clients)) {
+      const clientUp = clients.filter(cli => cli.id === client.id)[0];
+      const index = this.arrayObjectIndexOf(clients, clientUp);
+      clientUp.status = true;
       clients[index] = clientUp;
       localStorage.setItem('clients', JSON.stringify(clients))
       return clientUp;
@@ -74,6 +96,16 @@ export class ClientsService {
     } else {
       return 0;
     }
+  }
+
+   getCities() {
+    const cities = JSON.parse(localStorage.getItem('cities'));
+    return cities;
+  }
+
+  getDealers() {
+    const dealers = JSON.parse(localStorage.getItem('dealers'));
+    return dealers;
   }
 
   // Get the index from array's objects
