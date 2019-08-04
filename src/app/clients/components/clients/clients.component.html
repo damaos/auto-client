@@ -15,10 +15,10 @@
                                     <div class="row">
                                         <div class="col col-md-4">
                                             <mat-form-field  appearance="outline">
-                                                <mat-label>Favorite food</mat-label>
-                                                <mat-select>
-                                                  <mat-option *ngFor="let food of [1,2,3,4,5]" [value]="food">
-                                                    {{food}}
+                                                <mat-label>Ciudad</mat-label>
+                                                <mat-select [(ngModel)]="city">
+                                                  <mat-option *ngFor="let city of cities" [value]="city">
+                                                    {{city}}
                                                   </mat-option>
                                                 </mat-select>
                                             </mat-form-field>
@@ -26,10 +26,10 @@
 
                                         <div class="col col-md-4">
                                             <mat-form-field  appearance="outline">
-                                                <mat-label>Favorite food</mat-label>
-                                                <mat-select>
-                                                  <mat-option *ngFor="let food of [1,2,3,4,5]" [value]="food">
-                                                    {{food}}
+                                                <mat-label>Consecionario</mat-label>
+                                                <mat-select [(ngModel)]="dealer">
+                                                  <mat-option *ngFor="let dealer of dealers" [value]="dealer">
+                                                    {{dealer}}
                                                   </mat-option>
                                                 </mat-select>
                                             </mat-form-field>
@@ -38,20 +38,20 @@
                                         <div class="col col-md-3">
                                             <mat-form-field appearance="outline">
                                                 <mat-label>Buscar</mat-label>
-                                                <input matInput placeholder="Buscar">
+                                                <input [(ngModel)]="searchTextOne"  [ngModelOptions]="{standalone: true}" matInput placeholder="Buscar">
                                                 <mat-icon matSuffix>search</mat-icon>
                                             </mat-form-field>
                                         </div>
 
                                         <div class="col col-md-1">
-                                            <button (click)="openDialogAddClient()" mat-raised-button color="primary" style='margin-top: 15%;'  aria-label="Example icon-button with a heart icon">
+                                            <button (click)="openDialogClient()" mat-raised-button color="primary" style='margin-top: 15%;'  aria-label="Example icon-button with a heart icon">
                                                 Agregar cliente
                                             </button>
                                         </div>
 
                                     </div>
                                     <br>
-                                    <mat-list *ngFor="let client of clientsActives; let i = index;">
+                                    <mat-list *ngFor="let client of clientsActives | mySearchPipe : searchTextOne | myCityPipe : city | myDealerPipe: dealer; let i = index;">
                                         <mat-list-item>
                                             <mat-toolbar>
                                                 <mat-toolbar-row class="items-border">
@@ -63,8 +63,8 @@
                                                         <mat-icon>more_vert</mat-icon>
                                                     </button>
                                                     <mat-menu #menu="matMenu">
-                                                        <button mat-menu-item>Ver detalle</button>
-                                                        <button mat-menu-item>Actualizar</button>
+                                                        <button (click)="openDialogClient(client, 3)" mat-menu-item>Ver detalle</button>
+                                                        <button (click)="openDialogClient(client, 2, i)" mat-menu-item>Actualizar</button>
                                                         <button (click)="disableClient(i, client)" mat-menu-item>Inactivar</button>
                                                     </mat-menu>
 
@@ -93,10 +93,10 @@
                                     <div class="row">
                                         <div class="col col-md-4">
                                             <mat-form-field  appearance="outline">
-                                                <mat-label>Favorite food</mat-label>
-                                                <mat-select>
-                                                  <mat-option *ngFor="let food of [1,2,3,4,5]" [value]="food">
-                                                    {{food}}
+                                                <mat-label>Ciudad</mat-label>
+                                                <mat-select [(ngModel)]="cityIn">
+                                                  <mat-option *ngFor="let city of cities" [value]="city">
+                                                    {{city}}
                                                   </mat-option>
                                                 </mat-select>
                                             </mat-form-field>
@@ -104,10 +104,10 @@
 
                                         <div class="col col-md-4">
                                             <mat-form-field  appearance="outline">
-                                                <mat-label>Favorite food</mat-label>
-                                                <mat-select>
-                                                  <mat-option *ngFor="let food of [1,2,3,4,5]" [value]="food">
-                                                    {{food}}
+                                                <mat-label>Consecionario</mat-label>
+                                                <mat-select [(ngModel)]="dealerIn">
+                                                  <mat-option *ngFor="let dealer of dealers" [value]="dealer">
+                                                    {{dealer}}
                                                   </mat-option>
                                                 </mat-select> 
                                             </mat-form-field>
@@ -116,13 +116,14 @@
                                         <div class="col col-md-3">
                                             <mat-form-field appearance="outline">
                                                 <mat-label>Buscar</mat-label>
-                                                <input matInput placeholder="Buscar">
+                                                <input [(ngModel)]="searchText" 
+                                                [ngModelOptions]="{standalone: true}" matInput placeholder="Buscar">
                                                 <mat-icon matSuffix>search</mat-icon>
                                             </mat-form-field>
                                         </div>
                                     </div>
                                     <br>
-                                    <mat-list *ngFor="let client of clientsInactives">
+                                    <mat-list *ngFor="let client of clientsInactives | mySearchPipe : searchText | myCityPipe : cityIn | myDealerPipe: dealerIn; let i = index">
                                         <mat-list-item>
                                             <mat-toolbar>
                                                 <mat-toolbar-row class="items-border">
@@ -134,9 +135,9 @@
                                                         <mat-icon>more_vert</mat-icon>
                                                     </button>
                                                     <mat-menu #menu="matMenu">
-                                                        <button mat-menu-item>Ver detalle</button>
-                                                        <button mat-menu-item>Actualizar</button>
-                                                        <button mat-menu-item>Activar</button>
+                                                        <button (click)="openDialogClient(client, 3)" mat-menu-item>Ver detalle</button>
+                                                        <button (click)="openDialogClient(client, 2, i)" mat-menu-item>Actualizar</button>
+                                                        <button (click)="enableClient(i, client)" mat-menu-item>Activar</button>
                                                     </mat-menu>
 
                                                 </mat-toolbar-row>

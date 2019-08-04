@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClientsService } from 'app/clients/services/clients.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ClientUXComponent } from '../client-ux/client-ux.component';
+import { ClientModel } from 'app/clients/models/clients/clients.model';
 
 @Component({
   selector: 'app-sales',
@@ -12,11 +13,25 @@ export class ClientsComponent implements OnInit {
   public clientsActives: any[];
   public clientsInactives: any[];
 
+  public searchText: string;
+  public searchTextOne: string;
+
+  public cities: any[];
+  public dealers: any[];
+
+  public dealer: string;
+  public dealerIn: string;
+
+  public city: string;
+  public cityIn: string;
+
   constructor(
     public dialog: MatDialog,
     private clientsService: ClientsService) { }
 
   ngOnInit() {
+    this.cities = this.clientsService.getCities();
+    this.dealers = this.clientsService.getDealers();
     this.getClientsActives();
     this.getClientsInactives();
   }
@@ -25,7 +40,6 @@ export class ClientsComponent implements OnInit {
     this.clientsService.getClientsActives().then(res => {
       if (res.length > 0) {
         this.clientsActives = res;
-        console.log(this.clientsActives)
       }
     });
   }
@@ -34,33 +48,59 @@ export class ClientsComponent implements OnInit {
     this.clientsService.getClientsInactives().then(res => {
       if (res.length > 0) {
         this.clientsInactives = res;
-        console.log(this.clientsInactives);
       }
     });
   }
 
-  openDialogAddClient() {
+  openDialogClient(client: ClientModel, inmed = 1, index) {
     const dialogRef = this.dialog.open(ClientUXComponent, {
       width: '450px',
       data: {
-        id: Math.floor((Math.random() * 1000 ) + 1),
-        name: '',
-        dealer: '',
-        city: '',
-        createDate: new Date(),
-        status: true
+        module: inmed,
+        data: {
+          id: client ? client.id : Math.floor((Math.random() * 1000 ) + 1),
+          name: client ? client.name : '',
+          dealer: client ? client.dealer : '',
+          city: client ? client.city : '',
+          createDate: client ? client.createDate : new Date(),
+          status: client ? client.status : true
+        }
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.clientsService.addClient(result).then(() => {
-        if (!this.clientsActives) {
-          this.clientsActives = [];
-          this.clientsActives.push(result);
-        } else {
-          this.clientsActives.push(result);
-        }
-      })
+      switch (inmed) {
+        case 1:
+          if (result) {
+            this.clientsService.addClient(result).then(() => {
+              if (result !== null) {
+                if (!this.clientsActives) {
+                  this.clientsActives = [];
+                  this.clientsActives.push(result);
+                } else {
+                  this.clientsActives.push(result);
+                }
+              };
+            })
+          }
+          break;
+
+        case 2:
+          if (result) {
+            this.clientsService.updateClient(result).then(() => {
+              if (result !== null) {
+                if (result.status) {
+                  this.clientsActives[index] = result;
+                } else {
+                  this.clientsInactives[index] = result;
+                }
+              };
+            })
+          }
+          break;
+        case 3:
+          break;
+      }
     });
   }
 
@@ -72,6 +112,18 @@ export class ClientsComponent implements OnInit {
         this.clientsInactives.push(cli);
       } else {
         this.clientsInactives.push(cli);
+      }
+    })
+  }
+
+  enableClient(index, client) {
+    this.clientsService.enableClient(client).then((cli) => {
+      this.clientsInactives.splice(index, 1);
+      if (!this.clientsActives) {
+        this.clientsActives = [];
+        this.clientsActives.push(cli);
+      } else {
+        this.clientsActives.push(cli);
       }
     })
   }
