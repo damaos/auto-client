@@ -19,13 +19,5 @@ export const AdminLayoutRoutes: Routes = [
             path: 'clients',
             loadChildren: () => import('../../clients/clients.module').then(m => m.ClientsModule)
         }],
-    },
-    {
-        path: 'delears',
-        component: ClientsComponent,
-        children: [{
-            path: 'delears',
-            loadChildren: () => import('../../clients/clients.module').then(m => m.ClientsModule)
-        }],
-    },
+    }
 ];
